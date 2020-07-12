@@ -4,7 +4,7 @@
 <br>
 
 #### ☕ 제3회 정부혁신제안 끝장개발대회 메이커톤
-<div style="background-color: #efefef">
+<div style="background-color: #dfdfdf">
 👉 정부가 가진 난제(코로나19 재난상황)를 국민과 함께 공동생산방식으로 문제해결 해커톤
 </div>
 
