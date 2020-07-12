@@ -11,6 +11,41 @@
 <br>
 
 <details>
+<summary>  Commit 정책 (눌러서 내용보기) </summary>
+<div markdown="1">
+
+🥇 **Commit Message 정책**을 정해봐요.
+
+앞에 문구 종류: https://blog.ull.im/engineering/2019/03/10/logs-on-git.html
+좋은 git 커밋 메시지를 작성하기 위한 8가지 약속: https://djkeh.github.io/articles/How-to-write-a-git-commit-message-kor/
+Commit Message 바꾸기: http://tech.javacafe.io/2018/03/01/how-to-change-git-commit-message/
+
+**<정책>**
+1. 커밋은 다음과 같은 형식으로 지정한다.
+
+[커밋 종류]: 파일명 / 내용 (Pull requests 번호 링크)
+
+**- 커밋 종류**
+
+**[FIX]**: 파일명 / 내용 (Pull requests 번호)
+Description: **코드 버그 수정**
+
+**[CREATE]**: 파일명 / 내용 (Pull requests 번호)
+Description: **코드파일, 디렉토리 생성**
+
+**[COMPLETE]**: 파일명 / 내용 (Pull requests 번호)
+Description: **더이상 추가사항 없을시**
+
+**[REMOVE]**: 파일명 / 내용 (Pull requests 번호)
+Description: **불필요한 파일, 디렉토리 제거**
+
+**[REFACTOR]**: 파일명 / 내용 (Pull requests 번호)
+Description: **[FIX], 불필요한 주석 제거, 간소화**
+
+</div>
+</details>
+
+<details>
 <summary>  일정 (눌러서 내용보기) </summary>
 <div markdown="1">
 
