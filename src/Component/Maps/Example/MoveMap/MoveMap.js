@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import MapGL from "react-map-gl";
 
-import { config } from "../../../config";
+import { config } from "../../../../config";
 
-function ReactMapGL() {
+function MoveMap() {
   const [viewport, setViewport] = useState({
     latitude: 37.8,
     longitude: -122.4,
-    zoom: 14,
+    zoom: 7,
     bearing: 0,
     pitch: 0,
   });
   useEffect(() => {
     const interval = setInterval(() => {
-      setViewport({...viewport,latitude: viewport.latitude + 1})
+      setViewport({...viewport,latitude: viewport.latitude + 0.01})
       console.log(viewport)
-    }, 1000);
+    }, 100);
     return () => clearInterval(interval);
-  }, []);
+  }, [viewport]);
+
   return (
     <MapGL
       {...viewport}
@@ -30,4 +31,6 @@ function ReactMapGL() {
   );
 }
 
-export default ReactMapGL;
+export default MoveMap;
+
+// https://upmostly.com/tutorials/setinterval-in-react-components-using-hooks
