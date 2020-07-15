@@ -1,6 +1,7 @@
 import React from "react";
+
+import ReactMapGL from "./Component/Maps/ReactMapGL/ReactMapGL";
 import "./App.css";
-import ReactMapGL from "./Maps/react-map-gl";
 
 function App() {
   return (

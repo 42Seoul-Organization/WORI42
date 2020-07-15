@@ -1,9 +1,7 @@
-import * as React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import MapGL from "react-map-gl";
-import { config } from "../config";
 
-// const MAPBOX_TOKEN = ; // Set your mapbox token here
+import { config } from "../../../config";
 
 function ReactMapGL() {
   const [viewport, setViewport] = useState({
