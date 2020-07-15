@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/WORI42/static/css/main.5f361e03.chunk.css",
+    "main.js": "/WORI42/static/js/main.db747e40.chunk.js",
+    "main.js.map": "/WORI42/static/js/main.db747e40.chunk.js.map",
+    "runtime-main.js": "/WORI42/static/js/runtime-main.b836205d.js",
+    "runtime-main.js.map": "/WORI42/static/js/runtime-main.b836205d.js.map",
+    "static/js/2.04a95178.chunk.js": "/WORI42/static/js/2.04a95178.chunk.js",
+    "static/js/2.04a95178.chunk.js.map": "/WORI42/static/js/2.04a95178.chunk.js.map",
+    "index.html": "/WORI42/index.html",
+    "precache-manifest.c03ad3b941506ab079cba08be4502170.js": "/WORI42/precache-manifest.c03ad3b941506ab079cba08be4502170.js",
+    "service-worker.js": "/WORI42/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/WORI42/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.04a95178.chunk.js.LICENSE.txt": "/WORI42/static/js/2.04a95178.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/WORI42/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b836205d.js",
+    "static/js/2.04a95178.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.db747e40.chunk.js"
+  ]
+}
