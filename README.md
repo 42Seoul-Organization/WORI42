@@ -100,5 +100,8 @@ Github
 
 - file:///Users/leehochan/Downloads/2020%20%EC%A0%95%EB%B6%80%ED%98%81%EC%8B%A0%20%EC%A2%85%ED%95%A9%20%EC%B6%94%EC%A7%84%EA%B3%84%ED%9A%8D.pdf
 위 파일에서 17p  
+
+사례  
+- https://now.k2base.re.kr/portal/trend/mainTrend/view.do?poliTrndId=TRND0000000000039185&menuNo=200043&pageUnit=10&pageIndex=1
 </div>
 </details>
