@@ -1,27 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
 import MapGL, { FlyToInterpolator } from "react-map-gl";
-import { ScatterplotLayer } from "@deck.gl/layers";
 
 import { config } from "../../../config";
-import { data } from "../sampleData";
 import InputBox from "./InputBox";
-
-const layer = new ScatterplotLayer({
-  id: "scatterplot-layer",
-  data,
-  pickable: true,
-  opacity: 0.4,
-  stroked: true,
-  filled: true,
-  radiusScale: 6,
-  radiusMinPixels: 1,
-  radiusMaxPixels: 100,
-  lineWidthMinPixels: 1,
-  getPosition: (d) => d.coordinates,
-  getRadius: (d) => Math.sqrt(d.exits),
-  getFillColor: (d) => [255, 140, 0],
-  getLineColor: (d) => [0, 0, 0],
-});
+import request from "../Axios/request"
 
 function Compose() {
   const [info, setInfo] = useState({
@@ -47,7 +29,7 @@ function Compose() {
   );
 
   const goToViewPort = useCallback(
-    (vp) => {
+    () => {
       setInfo({
         ...info,
         isMain: false,
@@ -74,6 +56,17 @@ function Compose() {
     }
     return;
   }, [info]);
+
+  useEffect(()=> {
+    request(
+      "get",
+      "https://maps.googleapis.com/maps/api/geocode/json",
+      {
+        address: "개포동 이노베이션아카데미",
+        key: config.Google_Token,
+      }
+    );
+  }, [])
 
   return (
     <MapGL
