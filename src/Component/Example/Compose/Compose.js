@@ -2,15 +2,15 @@ import React, { useState, useCallback, useEffect } from "react";
 import MapGL, { FlyToInterpolator } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import request from "../Axios/request";
 import { config } from "../../../config";
+import request from "../Axios/request";
 import InputBox from "./InputBox";
 
 function Compose() {
   const [info, setInfo] = useState({
     longitude: 127.024612,
     latitude: 37.5326,
-    zoom: 11,
+    zoom: 9,
     pitch: 0,
     bearing: 0,
     transitionInterpolator: new FlyToInterpolator({ speed: 1.2 }),
@@ -75,16 +75,13 @@ function Compose() {
       mapStyle="mapbox://styles/mapbox/dark-v9"
       mapboxApiAccessToken={config.MAPBOX_TOKEN}
     >
-      {info.isMain ? (
-        <InputBox
-          info={info}
-          setInfo={setInfo}
-          mainSearchInput={mainSearchInput}
-          goToViewPort={goToViewPort}
-        />
-      ) : (
-        ""
-      )}
+      <InputBox
+        info={info}
+        setInfo={setInfo}
+        mainSearchInput={mainSearchInput}
+        goToViewPort={goToViewPort}
+        isMain={info.isMain}
+      />
     </MapGL>
   );
 }
