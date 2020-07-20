@@ -5,6 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 // import { config } from "../../../config";
 import request from "../Axios/request";
 import InputBox from "./InputBox";
+require('dotenv').config();
 
 function Compose() {
   const [info, setInfo] = useState({
