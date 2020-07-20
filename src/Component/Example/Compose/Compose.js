@@ -1,15 +1,16 @@
 import React, { useState, useCallback, useEffect } from "react";
 import MapGL, { FlyToInterpolator } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-import request from '../Axios/request'
+import request from "../Axios/request";
 import { config } from "../../../config";
 import InputBox from "./InputBox";
 
 function Compose() {
   const [info, setInfo] = useState({
-    longitude: -122.41669,
-    latitude: 37.7853,
-    zoom: 9,
+    longitude: 127.024612,
+    latitude: 37.5326,
+    zoom: 11,
     pitch: 0,
     bearing: 0,
     transitionInterpolator: new FlyToInterpolator({ speed: 1.2 }),
@@ -28,20 +29,26 @@ function Compose() {
     [info]
   );
 
-  const goToViewPort = useCallback(
-    () => {
-      setInfo({
-        ...info,
-        isMain: false,
-        latitude: 37.5326,
-        longitude: 127.024612,
-        zoom: 11,
-        transitionInterpolator: new FlyToInterpolator(),
-        transitionDuration: 1000,
+  const goToViewPort = useCallback(() => {
+    request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
+      address: info.searchInfo,
+      key: `${config.Google_Token}`,
+    })
+      .then((res) => {
+        setInfo({
+          ...info,
+          isMain: false,
+          latitude: res.data.results[0].geometry.location.lat,
+          longitude: res.data.results[0].geometry.location.lng,
+          zoom: 11,
+          transitionInterpolator: new FlyToInterpolator(),
+          transitionDuration: 1000,
+        });
+      })
+      .catch((res) => {
+        console.log(res);
       });
-    },
-    [info]
-  );
+  }, [info]);
 
   useEffect(() => {
     if (info.isMain) {
@@ -56,13 +63,6 @@ function Compose() {
     }
     return;
   }, [info]);
-
-  useEffect(() => {
-    request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
-      address: "개포동 이노베이션아카데미",
-      key: `${config.Google_Token}`
-    });
-  }, []);
 
   return (
     <MapGL

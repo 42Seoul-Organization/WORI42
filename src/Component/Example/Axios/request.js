@@ -1,17 +1,11 @@
 import axios from "axios";
 
-function request(method, url, params) {
-  return axios({
+const request = async (method, url, params, func) => {
+  return await axios({
     method,
     url,
     params
   })
-  .then((res) => {
-    console.log(res.data.results[0]);
-  })
-  .catch((res) => {
-    console.log(res);
-  });
 }
 
 export default request;
