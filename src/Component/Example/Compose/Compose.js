@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import MapGL, { FlyToInterpolator } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import { config } from "../../../config";
+// import { config } from "../../../config";
 import request from "../Axios/request";
 import InputBox from "./InputBox";
 
@@ -32,7 +32,7 @@ function Compose() {
   const goToViewPort = useCallback(() => {
     request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
       address: info.searchInfo,
-      key: `${config.Google_Token}`,
+      key: `${process.env.config.Google_Token}`,
     })
       .then((res) => {
         setInfo({
@@ -73,7 +73,7 @@ function Compose() {
       // mapboxApiAccessToken={config.MAPBOX_THEME}
       onViewportChange={(nextViewport) => setInfo({ ...info, ...nextViewport })}
       mapStyle="mapbox://styles/mapbox/dark-v9"
-      mapboxApiAccessToken={config.MAPBOX_TOKEN}
+      mapboxApiAccessToken={process.env.config.MAPBOX_TOKEN}
     >
       <InputBox
         info={info}
