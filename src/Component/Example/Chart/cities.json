@@ -1,0 +1,44 @@
+[
+  {
+    "city": "서울특별시",
+    "state": "한국",
+    "latitude": 37.56667,
+    "longitude": 126.97806
+  },
+  {
+    "city": "부산광역시",
+    "state": "한국",
+    "latitude": 35.17944,
+    "longitude": 129.07556
+  },
+  {
+    "city": "인천광역시",
+    "state": "한국",
+    "latitude": 37.45639,
+    "longitude": 126.70528
+  },
+  {
+    "city": "대구광역시",
+    "state": "한국",
+    "latitude": 35.87222,
+    "longitude": 128.6025
+  },
+  {
+    "city": "대전광역시",
+    "state": "한국",
+    "latitude": 36.35111,
+    "longitude": 127.385
+  },
+  {
+    "city": "광주광역시",
+    "state": "한국",
+    "latitude": 35.15972,
+    "longitude": 126.85306
+  },
+  {
+    "city": "개포동",
+    "state": "미국",
+    "latitude": 35.15972,
+    "longitude": 126.85306
+  }
+]
