@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = env.process.PORT || 3002
+const port = process.env.PORT || 3000
 var path = require('path');
 
 app.use(express.static(path.join(__dirname, 'react/build')));
