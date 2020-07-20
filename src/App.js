@@ -6,7 +6,8 @@ import "./App.css";
 function App() {
   return (
     <React.Fragment>
-      <Compose/>
+      {/* <Compose/> */}
+      <p>hi</p>
     </React.Fragment>
   );
 }
