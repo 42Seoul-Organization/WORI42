@@ -32,7 +32,9 @@ function request(method, url, params) {
     method,
     url: url,
     params,
+    dataType : "jsonp",
     headers: {
+      "Content-Type": "application/javascript",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Credentials": "true",
     },
