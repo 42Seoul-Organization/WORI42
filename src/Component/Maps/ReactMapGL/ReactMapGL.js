@@ -11,13 +11,7 @@ function ReactMapGL() {
     bearing: 0,
     pitch: 0,
   });
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setViewport({...viewport,latitude: viewport.latitude + 1})
-      console.log(viewport)
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  
   return (
     <MapGL
       {...viewport}
