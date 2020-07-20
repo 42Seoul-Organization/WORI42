@@ -3,7 +3,7 @@ import DeckGL from "@deck.gl/react";
 import { StaticMap } from "react-map-gl";
 import {ScatterplotLayer} from '@deck.gl/layers';
 
-import { config } from "../../../../config";
+import { config } from "../../../config";
 import { data } from "../sampleData";
 
 // Viewport settings

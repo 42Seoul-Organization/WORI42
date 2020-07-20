@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MapGL from "react-map-gl";
 
-import { config } from "../../../../config";
+import { config } from "../../../config";
 
 function MoveMap() {
   const [viewport, setViewport] = useState({

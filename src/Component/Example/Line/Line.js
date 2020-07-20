@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MapGL, { Marker } from "react-map-gl";
 
-import { config } from "../../../../config";
+import { config } from "../../../config";
 
 function Line() {
   const [viewport, setViewport] = useState({
