@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
 import MapGL, { FlyToInterpolator } from "react-map-gl";
 
+import request from '../Axios/request'
 import { config } from "../../../config";
 import InputBox from "./InputBox";
-import request from "../Axios/request"
 
 function Compose() {
   const [info, setInfo] = useState({
@@ -57,16 +57,12 @@ function Compose() {
     return;
   }, [info]);
 
-  useEffect(()=> {
-    request(
-      "get",
-      "https://maps.googleapis.com/maps/api/geocode/json",
-      {
-        address: "개포동 이노베이션아카데미",
-        key: config.Google_Token,
-      }
-    );
-  }, [])
+  useEffect(() => {
+    request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
+      address: "개포동 이노베이션아카데미",
+      key: `${config.Google_Token}`
+    });
+  }, []);
 
   return (
     <MapGL
