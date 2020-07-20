@@ -5,7 +5,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 // import { config } from "../../../config";
 import request from "../Axios/request";
 import InputBox from "./InputBox";
-require('dotenv').config();
+import dotenv from "dotenv"
+dotenv.config();
 
 function Compose() {
   const [info, setInfo] = useState({
@@ -19,7 +20,7 @@ function Compose() {
     searchInfo: "",
     isMain: true,
   });
-
+  
   const mainSearchInput = useCallback(
     (vp) => {
       setInfo({
@@ -33,7 +34,7 @@ function Compose() {
   const goToViewPort = useCallback(() => {
     request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
       address: info.searchInfo,
-      key: `${process.env.config.Google_Token}`,
+      key: process.env.REACT_APP_Google_Token
     })
       .then((res) => {
         setInfo({
@@ -74,7 +75,7 @@ function Compose() {
       // mapboxApiAccessToken={config.MAPBOX_THEME}
       onViewportChange={(nextViewport) => setInfo({ ...info, ...nextViewport })}
       mapStyle="mapbox://styles/mapbox/dark-v9"
-      mapboxApiAccessToken={process.env.config.MAPBOX_TOKEN}
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
       <InputBox
         info={info}
