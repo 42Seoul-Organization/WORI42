@@ -7,8 +7,6 @@ function Line() {
   const [viewport, setViewport] = useState({
     latitude: 37.413,
     longitude: 127.26,
-    latitude: 40.6643,
-    longitude: -73.9385,
     zoom: 14,
     bearing: 0,
     pitch: 0,

@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Stylish&display=swap');
+
+/* Color palette
+** https://at-corner.tistory.com/17
+*/
+// $main-color: #46ffff;
+$main-color: #ACFFEF;
+
+.mainBox {
+    /* div reponsible web */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 10px;
+
+    /* div layer */
+    max-width: 1800px;
+    width: 35vw;
+    height: 250px;
+
+    background-color: rgba(200, 200, 200, .1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+
+    font-family: 'Stylish', sans-serif;
+
+    /* div sublayer */
+    text-align: center;
+
+    input {
+        /* input layer */
+        margin: auto;
+        height: 30px;
+        background:transparent;
+
+        /* font layer */
+        color:$main-color;
+        font-weight: bold;
+        font-size: large;
+        &:focus {
+            /* input outLine */
+            outline: none;
+        }
+    }
+
+    button {
+        margin: auto;
+        height: 37px;
+        background:transparent;
+
+        /* font layer */
+        color:$main-color;
+        font-weight: bold;
+        font-size: large;
+        &:focus {
+            /* input outLine */
+            outline: none;
+        }
+    }
+
+    h2 {
+        text-align: center;
+        position: relative;
+        margin: 0 0 20px;
+        padding: 0;
+        font-size: 48px;
+        text-transform: uppercase;
+        z-index: 2;
+        color: $main-color;
+    }
+    p {
+        font-size: 1rem;
+        color: $main-color
+    }
+    a {
+        color: $main-color;
+        &:link {
+            color: $main-color;
+            text-decoration: none;
+        }
+        &:visited {
+            color: $main-color;
+        }
+    }
+}
+
+/* .mainBox::before {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    opacity: .5;
+}*/
+
+// @media (min-width: 481px) and (max-width: 768px) {
+// }
+
+// @media (min-width: 768px) {
+// }
