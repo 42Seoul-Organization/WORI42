@@ -2,10 +2,11 @@ import React, { useState, useCallback, useEffect } from "react";
 import MapGL, { FlyToInterpolator } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-// import { config } from "../../../config";
 import request from "../Axios/request";
-import InputBox from "./InputBox";
-import dotenv from "dotenv"
+import InputBox from "./InputBoxGrid";
+import "./compose.scss";
+
+import dotenv from "dotenv";
 dotenv.config();
 
 function Compose() {
@@ -20,7 +21,7 @@ function Compose() {
     searchInfo: "",
     isMain: true,
   });
-  
+
   const mainSearchInput = useCallback(
     (vp) => {
       setInfo({
@@ -34,7 +35,7 @@ function Compose() {
   const goToViewPort = useCallback(() => {
     request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
       address: info.searchInfo,
-      key: process.env.REACT_APP_Google_Token
+      key: process.env.REACT_APP_Google_Token,
     })
       .then((res) => {
         setInfo({
@@ -77,13 +78,17 @@ function Compose() {
       mapStyle="mapbox://styles/mapbox/dark-v9"
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
-      <InputBox
-        info={info}
-        setInfo={setInfo}
-        mainSearchInput={mainSearchInput}
-        goToViewPort={goToViewPort}
-        isMain={info.isMain}
-      />
+      <div className="container">
+        <div className="item">
+          <InputBox
+            info={info}
+            setInfo={setInfo}
+            mainSearchInput={mainSearchInput}
+            goToViewPort={goToViewPort}
+            isMain={info.isMain}
+          />
+        </div>
+      </div>
     </MapGL>
   );
 }
