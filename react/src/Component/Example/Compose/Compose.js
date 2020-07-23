@@ -13,7 +13,7 @@ function Compose() {
   const [info, setInfo] = useState({
     longitude: 127.024612,
     latitude: 37.5326,
-    zoom: 9,
+    zoom: 5.5,
     pitch: 0,
     bearing: 0,
     transitionInterpolator: new FlyToInterpolator({ speed: 1.2 }),
@@ -43,7 +43,7 @@ function Compose() {
           isMain: false,
           latitude: res.data.results[0].geometry.location.lat,
           longitude: res.data.results[0].geometry.location.lng,
-          zoom: 11,
+          zoom: 14,
           transitionInterpolator: new FlyToInterpolator(),
           transitionDuration: 1000,
         });
@@ -58,10 +58,10 @@ function Compose() {
       const interval = setInterval(() => {
         setInfo({
           ...info,
-          latitude: info.latitude + 0.01,
-          longitude: info.longitude + 0.01,
+          latitude: info.latitude + 0.005,
+          longitude: info.longitude + 0.005,
         });
-      }, 100);
+      }, 50);
       return () => clearInterval(interval);
     }
     return;
@@ -74,7 +74,7 @@ function Compose() {
       height="100vh"
       // mapStyle="mapbox://styles/holee/ckcmzzc5y24hb1ip8lnkdt8sq"
       // mapboxApiAccessToken={config.MAPBOX_THEME}
-      onViewportChange={(nextViewport) => setInfo({ ...info, ...nextViewport })}
+      onViewportChange={info.isMain ? ()=>{""} : (nextViewport) => setInfo({ ...info, ...nextViewport })}
       mapStyle="mapbox://styles/mapbox/dark-v9"
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
