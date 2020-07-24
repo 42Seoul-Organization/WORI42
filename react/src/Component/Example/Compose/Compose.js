@@ -39,6 +39,36 @@ function Compose() {
     [info]
   );
 
+  const getAddress = (data) => {
+    let temp = [];
+    data.map((data) =>
+      request("post", `https://maps.googleapis.com/maps/api/geocode/json`, {
+        latlng: data[1] + "," + data[0],
+        key: process.env.REACT_APP_Google_Token,
+      })
+        .then((res) => {
+          temp = [
+            temp.slice(),
+            {
+              province: res.results.address_components[1].long_name,
+              city: res.results.address_components[2].long_name,
+              group: "TRUE",
+              infection_case: "User_data",
+              confirmed: 1,
+              latitude: data[1],
+              longitude: data[0],
+              time: "UTF로 해주세요",
+              name: "hochan",
+            },
+          ];
+        })
+        .catch((res) => {
+          console.log(res);
+        })
+    );
+    return temp;
+  };
+
   const goToViewPort = useCallback(() => {
     request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
       address: info.searchInfo,
@@ -117,7 +147,10 @@ function Compose() {
   };
 
   const func_submit = () => {
-    console.log(markerList);
+    let temp
+    console.log(markerList)
+    temp = getAddress(markerList)
+    console.log(temp)
   };
 
   const func_revise = (idx, latitude, longitude) => {
@@ -146,7 +179,7 @@ function Compose() {
       mapStyle="mapbox://styles/holee/ckd0isb0511wr1iqvi1347ng8"
       // mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
-      {/* <Marker userData={userData} /> */}
+      <Marker userData={userData} />
 
       {markerList.map((data, index) => (
         <Pin

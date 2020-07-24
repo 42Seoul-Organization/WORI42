@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SideBar.scss";
-// import MyMarker from "./Marker";
 import UserInput from "../userinput/UserInput";
 
 function SideBar({func_create, func_submit}) {
-  const [markerList, setMarkerList] = useState([]);
-
   return (
     <React.Fragment>
-      <div className="board__box">
+      <div className="board_box">
         <input type="checkbox" id="menuicon" />
-        <label for="menuicon">
+        <label htmlFor="menuicon">
           <span></span>
           <span></span>
           <span></span>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UserInputListTemplate from "./UserInputListTemplate";
 import Form from "./Form";
 import UserInputList from "./UserInputList";
+import "./UserInput.scss"
 
 class UserInput extends Component {
   id = 3;
@@ -72,7 +73,8 @@ class UserInput extends Component {
     } = this;
 
     return (
-      <React.Fragment>
+      <div className="mainForm">
+        <h2>정보 보내기</h2>
       <UserInputListTemplate
         form={
           <Form
@@ -89,8 +91,8 @@ class UserInput extends Component {
           onRemove={handleRemove}
         />
       </UserInputListTemplate>
-      <button onClick={this.props.func_submit}>제출하기</button>
-      </React.Fragment>
+      <button className="userInputSubmit" onClick={this.props.func_submit}>제출하기</button>
+      </div>
     );
   }
 }
