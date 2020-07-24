@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./SideBar.css";
+import "./SideBar.scss";
 // import MyMarker from "./Marker";
 import UserInput from "../userinput/UserInput";
 
-function SideBar({func_create}) {
+function SideBar({func_create, func_submit}) {
   const [markerList, setMarkerList] = useState([]);
 
   return (
@@ -16,7 +16,7 @@ function SideBar({func_create}) {
           <span></span>
         </label>
         <div className="sidebar">
-          <UserInput func_create={func_create} />
+          <UserInput func_create={func_create} func_submit={func_submit}/>
         </div>
       </div>
     </React.Fragment>

@@ -72,6 +72,7 @@ class UserInput extends Component {
     } = this;
 
     return (
+      <React.Fragment>
       <UserInputListTemplate
         form={
           <Form
@@ -88,6 +89,8 @@ class UserInput extends Component {
           onRemove={handleRemove}
         />
       </UserInputListTemplate>
+      <button onClick={this.props.func_submit}>제출하기</button>
+      </React.Fragment>
     );
   }
 }
