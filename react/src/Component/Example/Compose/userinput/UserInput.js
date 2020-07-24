@@ -75,6 +75,7 @@ class UserInput extends Component {
     return (
       <div className="mainForm">
         <h2>정보 보내기</h2>
+        <p>최대 6개까지 가능합니다!</p>
       <UserInputListTemplate
         form={
           <Form

@@ -11,7 +11,7 @@ import SideBar from "./SideBar/SideBar";
 import Pin from "../Marker/Pin";
 import "./compose.scss";
 
-import Chart from "../Chart/Chart";
+// import Chart from "../Chart/Chart";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -206,11 +206,17 @@ function Compose() {
             "";
           }
         ) : (
-          <Sliderbar />
+            <Sliderbar />
         )}
-        <SideBar func_create={func_create} func_submit={func_submit}/>
+        {info.isMain ? (
+          () => {
+            "";
+          }
+        ) : (
+            <SideBar func_create={func_create} func_submit={func_submit}/>
+        )}
         <Footer />
-        <Chart />
+        {/* <Chart /> */}
       </div>
     </MapGL>
   );

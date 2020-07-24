@@ -1,13 +1,17 @@
 .form {
   display: flex;
+  align-items: center;
 }
 
 .form input {
   flex: 1; /* 버튼을 뺀 빈 공간을 모두 채워줍니다 */
+  height: 40px;
   font-size: 1.25rem;
   outline: none;
   border: none;
+  color: #22b8cf;
   border-bottom: 1px solid #c5f6fa;
+  background-color: rgba(200, 200, 200, .1);
 }
 
 .create-button {
