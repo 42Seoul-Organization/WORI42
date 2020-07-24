@@ -8,7 +8,7 @@
 }
 
 .userInput-item:hover {
-  background: #e3fafc;
+  background: rgba(200, 200, 200, .3);
 }
 
 /* userInput-item 에 마우스가 있을때만 .remove 보이기 */
@@ -31,6 +31,8 @@
 .userInput-text {
   flex: 1; /* 체크, 엑스를 제외한 공간 다 채우기 */
   word-break: break-all;
+  color: #acffef;
+  font-size: 1.2em;
 }
 
 .checked {
