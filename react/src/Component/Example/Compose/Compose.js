@@ -39,10 +39,9 @@ function Compose() {
     [info]
   );
 
-  let temp = [];
-
   const getAddress = (data) => {
-    temp = [];
+    let temp = [];
+
     data.map((data) =>
       request("post", `https://maps.googleapis.com/maps/api/geocode/json`, {
         latlng: data[1] + "," + data[0],
@@ -68,6 +67,7 @@ function Compose() {
           console.log(res);
         })
     );
+    return temp;
   };
 
   const goToViewPort = useCallback(() => {
@@ -148,8 +148,9 @@ function Compose() {
   };
 
   const func_submit = () => {
+    let temp;
     console.log(markerList);
-    getAddress(markerList);
+    temp = getAddress(markerList);
     console.log(temp);
   };
 
@@ -179,7 +180,7 @@ function Compose() {
       mapStyle="mapbox://styles/holee/ckd0isb0511wr1iqvi1347ng8"
       // mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
-      {/* <Marker userData={userData} /> */}
+      <Marker userData={userData} />
 
       {markerList.map((data, index) => (
         <Pin
