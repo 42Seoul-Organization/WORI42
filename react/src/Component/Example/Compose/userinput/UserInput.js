@@ -23,7 +23,7 @@ class UserInput extends Component {
     this.props.func_create(input);
     this.setState({
       input: "",
-      todos: todos.concat({
+      todos: todos.length >= 6 ? todos : todos.concat({
         id: this.id++,
         text: input,
         checked: false,
