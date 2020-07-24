@@ -6,6 +6,7 @@ import request from "../Axios/request";
 import InputBox from "./InputBoxGrid";
 import "./compose.scss";
 
+// import Chart from "../Chart/chart"
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -72,11 +73,12 @@ function Compose() {
       {...info}
       width="100vw"
       height="100vh"
-      // mapStyle="mapbox://styles/holee/ckcmzzc5y24hb1ip8lnkdt8sq"
-      // mapboxApiAccessToken={config.MAPBOX_THEME}
+      mapStyle="mapbox://styles/holee/ckcmzzc5y24hb1ip8lnkdt8sq"
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_THEME}
       onViewportChange={info.isMain ? ()=>{""} : (nextViewport) => setInfo({ ...info, ...nextViewport })}
-      mapStyle="mapbox://styles/mapbox/dark-v9"
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      // mapStyle="mapbox://styles/mapbox/dark-v9"
+      // mapStyle="mapbox://styles/mapbox/streets-v11"
+      // mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
       <div className="container">
         <div className="item">
@@ -88,6 +90,7 @@ function Compose() {
             isMain={info.isMain}
           />
         </div>
+        {/* <Chart/> */}
       </div>
     </MapGL>
   );
