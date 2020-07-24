@@ -7,15 +7,27 @@ function Circle() {
   return covid_data.map((Data, i) => {
     // console.log(Data);
     if (Data.latitude !== "-") {
-      return (
-        <Marker
-          key={i}
-          longitude={parseFloat(Data.longitude)}
-          latitude={parseFloat(Data.latitude)}
-        >
-          <div className="Circle" />
-        </Marker>
-      );
+      if (Data.group === "NEW") {
+        return (
+          <Marker
+            key={i}
+            longitude={parseFloat(Data.longitude)}
+            latitude={parseFloat(Data.latitude)}
+          >
+            <div className="Circle2" />
+          </Marker>
+        );
+      } else {
+        return (
+          <Marker
+            key={i}
+            longitude={parseFloat(Data.longitude)}
+            latitude={parseFloat(Data.latitude)}
+          >
+            <div className="Circle" />
+          </Marker>
+        );
+      }
     }
   });
 }
