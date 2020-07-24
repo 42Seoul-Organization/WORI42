@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import MapGL, { FlyToInterpolator, NavigationControl } from "react-map-gl";
 
-import MAPBOX_TOKEN from "../config";
+import MAPBOX_TOKEN from "./config";
 import ControlPanel from "./control-panel";
 import Circle from "./Marker";
 
@@ -40,7 +40,7 @@ function ReactMapGL() {
         width="100vw"
         height="100vh"
         transitionInterpolator={new FlyToInterpolator()}
-        mapStyle="mapbox://styles/mapbox/light-v9"
+        mapStyle="mapbox://styles/mapbox/dark-v9"
         onViewportChange={setViewport}
         mapboxApiAccessToken={MAPBOX_TOKEN}
       >

@@ -1,7 +1,30 @@
 .Circle {
-  width: 5px;
-  height: 5px;
+  width: 3px;
+  height: 3px;
   background-color: red;
+  /* background-color: #eb4343; */
+  /* background-color: bisque;
+  background-color: blue;
+  background-color: burlywood;
+  background-color: whitesmoke;
+  background-color: aqua; */
+  border-radius: 50%;
+  opacity: 1;
+  animation-name: example;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.Circle2 {
+  width: 3px;
+  height: 3px;
+  background-color: lime;
+  /* background-color: #eb4343; */
+  /* background-color: bisque;
+  background-color: blue;
+  background-color: burlywood;
+  background-color: whitesmoke;
+  background-color: aqua; */
   border-radius: 50%;
   opacity: 1;
   animation-name: example;
