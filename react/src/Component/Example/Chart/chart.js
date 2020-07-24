@@ -1,6 +1,6 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
-import "./chart.css";
+import "./chart.scss";
 
 const data = {
   labels: ["Red", "Green", "Yellow"],
@@ -13,7 +13,7 @@ const data = {
   ],
 };
 
-function MyChart() {
+function Chart() {
   return (
     <div className="chart">
       <Doughnut data={data} />
@@ -21,4 +21,4 @@ function MyChart() {
   );
 }
 
-export default MyChart;
+export default Chart;

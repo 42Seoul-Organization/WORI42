@@ -7,9 +7,11 @@ import InputBox from "./InputBoxGrid";
 import Marker from "./Marker/Marker";
 import Sliderbar from "./Slidebar/Sliderbar";
 import Footer from "./Footer/Footer";
+import SideBar from "./SideBar/SideBar";
+import Pin from "../Marker/Pin";
 import "./compose.scss";
 
-// import Chart from "../Chart/chart"
+import Chart from "../Chart/Chart";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -25,7 +27,7 @@ function Compose() {
     searchInfo: "",
     isMain: true,
   });
-  const [userData, setUserData] = useState([])
+  const [userData, setUserData] = useState([]);
 
   const mainSearchInput = useCallback(
     (vp) => {
@@ -73,36 +75,55 @@ function Compose() {
   }, [info]);
 
   useEffect(() => {
-    request("post", `https://hackertonopendata.herokuapp.com/covid19/data/user`, {
-      user_data: [{
-        province: "Seoul",
-        city: "Yongsan-gu",
-        group: "TRUE",
-        infection_case: "Itaewon Clubs",
-        confirmed: 139,
-        latitude: 37.538621,
-        longitude: 126.992652,
-        time: "UTF로 해주세요",
-        name: "hochan"
-      },{
-        province: "Seoul",
-        city: "Gwanak-gu",
-        group: "TRUE",
-        infection_case: "Richway",
-        confirmed: 119,
-        latitude: 37.48208,
-        longitude: 126.901384,
-        time: "UTF로 해주세요",
-        name: "Jamin"
-      }]
+    request("post", `http://localhost:3013/covid19/data/user`, {
+      user_data: [
+        {
+          province: "Seoul",
+          city: "Yongsan-gu",
+          group: "TRUE",
+          infection_case: "Itaewon Clubs",
+          confirmed: 139,
+          latitude: 37.538621,
+          longitude: 126.992652,
+          time: "UTF로 해주세요",
+          name: "hochan",
+        },
+        {
+          province: "Seoul",
+          city: "Gwanak-gu",
+          group: "TRUE",
+          infection_case: "Richway",
+          confirmed: 119,
+          latitude: 37.48208,
+          longitude: 126.901384,
+          time: "UTF로 해주세요",
+          name: "Jamin",
+        },
+      ],
     })
       .then((res) => {
-        setUserData(res.data)
+        setUserData(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  },[]);
+  }, []);
+
+  const [markerList, setMarkerList] = useState([]);
+
+  const func_create = (name) => {
+    setMarkerList(markerList.concat([[37.5326, 127.024612, name]])); // 현재 지도에서 보고 있는 좌표의 정 가운데 좌표를 넣어줘야 함
+    console.log(markerList);
+  };
+
+  const func_submit = () => {};
+
+  const func_revise = (idx, latitude, longitude) => {
+    let revised = markerList.slice();
+    revised[idx][0] = latitude;
+    revised[idx][1] = longitude;
+    setMarkerList(revised);
+  };
 
   return (
     <MapGL
@@ -110,7 +131,7 @@ function Compose() {
       width="100vw"
       height="100vh"
       // mapStyle="mapbox://styles/holee/ckcmzzc5y24hb1ip8lnkdt8sq"
-      // mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_THEME}
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_THEME}
       onViewportChange={
         info.isMain
           ? () => {
@@ -119,10 +140,22 @@ function Compose() {
           : (nextViewport) => setInfo({ ...info, ...nextViewport })
       }
       // mapStyle="mapbox://styles/mapbox/streets-v11"
-      mapStyle="mapbox://styles/mapbox/dark-v9"
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      // mapStyle="mapbox://styles/mapbox/dark-v9"
+      mapStyle="mapbox://styles/holee/ckd0isb0511wr1iqvi1347ng8"
+      // mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
-      <Marker userData={userData}/>
+      {/* <Marker userData={userData} /> */}
+
+      {markerList.map((data, index) => (
+        <Pin
+          key={index}
+          num={index}
+          latitude={data[0]}
+          longitude={data[1]}
+          func_revise={func_revise}
+        />
+      ))}
+
       <div className="container">
         <div className="item">
           <InputBox
@@ -133,15 +166,16 @@ function Compose() {
             isMain={info.isMain}
           />
         </div>
-        {/* {info.isMain ? (
+        {info.isMain ? (
           () => {
             "";
           }
         ) : (
           <Sliderbar />
-        )} */}
+        )}
+        <SideBar func_create={func_create}/>
         <Footer />
-        {/* <Chart/> */}
+        <Chart />
       </div>
     </MapGL>
   );
