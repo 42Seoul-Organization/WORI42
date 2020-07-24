@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Marker } from "react-map-gl";
 
 const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
@@ -72,7 +72,6 @@ export class Pin extends React.Component {
               stroke: "none",
               transform: `translate(${-SIZE / 2}px,${-SIZE}px)`,
             }}
-            // onClick={() => onClick(city)}
           >
             <path d={ICON} />
           </svg>
