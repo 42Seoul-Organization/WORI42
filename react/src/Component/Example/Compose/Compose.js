@@ -11,7 +11,7 @@ import SideBar from "./SideBar/SideBar";
 import Pin from "../Marker/Pin";
 import "./compose.scss";
 
-import Chart from "../Chart/Chart";
+// import Chart from "../Chart/Chart";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -38,6 +38,37 @@ function Compose() {
     },
     [info]
   );
+
+  let temp = [];
+
+  const getAddress = (data) => {
+    temp = [];
+    data.map((data) =>
+      request("post", `https://maps.googleapis.com/maps/api/geocode/json`, {
+        latlng: data[1] + "," + data[0],
+        key: process.env.REACT_APP_Google_Token,
+      })
+        .then((res) => {
+          temp = [
+            temp.slice(),
+            {
+              province: res.results.address_components[1].long_name,
+              city: res.results.address_components[2].long_name,
+              group: "TRUE",
+              infection_case: "User_data",
+              confirmed: 1,
+              latitude: data[1],
+              longitude: data[0],
+              time: "UTF로 해주세요",
+              name: "hochan",
+            },
+          ];
+        })
+        .catch((res) => {
+          console.log(res);
+        })
+    );
+  };
 
   const goToViewPort = useCallback(() => {
     request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
@@ -116,7 +147,11 @@ function Compose() {
     console.log(markerList);
   };
 
-  const func_submit = () => {};
+  const func_submit = () => {
+    console.log(markerList);
+    getAddress(markerList);
+    console.log(temp);
+  };
 
   const func_revise = (idx, latitude, longitude) => {
     let revised = markerList.slice();
@@ -173,9 +208,9 @@ function Compose() {
         ) : (
           <Sliderbar />
         )}
-        <SideBar func_create={func_create}/>
+        <SideBar func_create={func_create} func_submit={func_submit} />
         <Footer />
-        <Chart />
+        {/* <Chart /> */}
       </div>
     </MapGL>
   );
