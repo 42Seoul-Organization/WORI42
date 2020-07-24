@@ -74,20 +74,58 @@ router.post("/data/user", cors(), async function (req, res) {
   let userData = [];
   let iterator = req.query.user_data.entries();
 
+  const dataBuffer = fs.readFileSync(__dirname + "/data/userData.json", "utf8");
+
+  let count = JSON.parse(dataBuffer.toString())["count"]
+
   for (let v of iterator) {
-    userData.push(JSON.parse(v[1]));
+    let data = JSON.parse(v[1])
+    let result = {
+      case_id: count++,
+      province: data.province,
+      city: data.city,
+      group: data.group,
+      infection_case: data.infection_case,
+      confirmed: data.confirmed,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      time: data.time,
+      name: data.name,
+    };
+    console.log(JSON.parse(v[1]))
+    userData.push(result);
   }
-  const dataBuffer = fs.readFileSync(__dirname + '/data/userData.json', 'utf8');
 
   for (let v of JSON.parse(dataBuffer.toString())["userData"]) {
-    userData.push(v)
+    userData.push(v);
   }
 
-  let data = JSON.stringify({"userData": userData})
-  fs.writeFileSync(__dirname + '/data/userData.json', data ,'utf8', function(error, data){
-    if (error) {throw error};
+  let data = JSON.stringify({count: count, userData: userData });
+  fs.writeFileSync(__dirname + "/data/userData.json", data, "utf8", function (
+    error,
+    data
+  ) {
+    if (error) {
+      throw error;
+    }
   });
 
+  res.set("Content-Type", "text/json");
+  res.status(200).json(COVID19);
+});
+
+/* POST service page. */
+router.get("/data/user/erase", cors(), async function (req, res) {
+  let data = JSON.stringify({ count: 0, userData: [] });
+  fs.writeFileSync(__dirname + "/data/userData.json", data, "utf8", function (
+    error,
+    data
+  ) {
+    if (error) {
+      throw error;
+    }
+  });
+  console.log("erase");
   res.set("Content-Type", "text/json");
   res.status(200).json(COVID19);
 });
