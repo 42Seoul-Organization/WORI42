@@ -28,6 +28,7 @@ function Compose() {
     isMain: true,
   });
   const [userData, setUserData] = useState([]);
+  const [convertedData, setConvertedData] = useState([]);
 
   const mainSearchInput = useCallback(
     (vp) => {
@@ -40,34 +41,29 @@ function Compose() {
   );
 
   const getAddress = (data) => {
-    let temp = [];
-
     data.map((data) =>
-      request("post", `https://maps.googleapis.com/maps/api/geocode/json`, {
-        latlng: data[1] + "," + data[0],
+      request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
+        latlng: data[0] + "," + data[1],
         key: process.env.REACT_APP_Google_Token,
       })
         .then((res) => {
-          temp = [
-            temp.slice(),
-            {
-              province: res.results.address_components[1].long_name,
-              city: res.results.address_components[2].long_name,
-              group: "TRUE",
-              infection_case: "User_data",
-              confirmed: 1,
-              latitude: data[1],
-              longitude: data[0],
-              time: "UTF로 해주세요",
-              name: "hochan",
-            },
-          ];
+          let result = {
+            province: res.data.results[0].address_components[1].long_name,
+            city: res.data.results[0].address_components[2].long_name,
+            group: "TRUE",
+            infection_case: "User_data",
+            confirmed: 1,
+            latitude: data[1],
+            longitude: data[0],
+            time: "UTF로 해주세요",
+            name: "hochan",
+          };
+          setConvertedData([...convertedData, result]);
         })
         .catch((res) => {
           console.log(res);
         })
     );
-    return temp;
   };
 
   const goToViewPort = useCallback(() => {
@@ -143,15 +139,17 @@ function Compose() {
   const [markerList, setMarkerList] = useState([]);
 
   const func_create = (name) => {
-    setMarkerList(markerList.concat([[37.5326, 127.024612, name]])); // 현재 지도에서 보고 있는 좌표의 정 가운데 좌표를 넣어줘야 함
+    if (markerList.length <= 6) {
+      setMarkerList(markerList.concat([[37.5326, 127.024612, name]])); // 현재 지도에서 보고 있는 좌표의 정 가운데 좌표를 넣어줘야 함
+    }
     console.log(markerList);
   };
 
   const func_submit = () => {
     let temp;
     console.log(markerList);
-    temp = getAddress(markerList);
-    console.log(temp);
+    getAddress(markerList);
+    console.log(convertedData);
   };
 
   const func_revise = (idx, latitude, longitude) => {

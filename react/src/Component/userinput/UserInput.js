@@ -20,14 +20,16 @@ class UserInput extends Component {
   handleCreate = () => {
     const { input, todos } = this.state;
     this.props.func_create(input);
-    this.setState({
-      input: "",
-      todos: todos.concat({
-        id: this.id++,
-        text: input,
-        checked: false,
-      }),
-    });
+    if (todos.length <= 6) {
+      this.setState({
+        input: "",
+        todos: todos.concat({
+          id: this.id++,
+          text: input,
+          checked: false,
+        }),
+      });
+    }
   };
 
   handleKeyPress = (e) => {
