@@ -4,6 +4,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 import request from "../Axios/request";
 import InputBox from "./InputBoxGrid";
+import Marker from "./Marker/Marker";
+import Sliderbar from "./Slidebar/Sliderbar";
+import Footer from "./Footer/Footer";
 import "./compose.scss";
 
 // import Chart from "../Chart/chart"
@@ -22,6 +25,7 @@ function Compose() {
     searchInfo: "",
     isMain: true,
   });
+  const [userData, setUserData] = useState([])
 
   const mainSearchInput = useCallback(
     (vp) => {
@@ -55,7 +59,7 @@ function Compose() {
   }, [info]);
 
   useEffect(() => {
-    if (info.isMain) {
+    if (info.isMain && info.longitude <= 128) {
       const interval = setInterval(() => {
         setInfo({
           ...info,
@@ -68,18 +72,57 @@ function Compose() {
     return;
   }, [info]);
 
+  useEffect(() => {
+    request("post", `https://hackertonopendata.herokuapp.com/covid19/data/user`, {
+      user_data: [{
+        province: "Seoul",
+        city: "Yongsan-gu",
+        group: "TRUE",
+        infection_case: "Itaewon Clubs",
+        confirmed: 139,
+        latitude: 37.538621,
+        longitude: 126.992652,
+        time: "UTF로 해주세요",
+        name: "hochan"
+      },{
+        province: "Seoul",
+        city: "Gwanak-gu",
+        group: "TRUE",
+        infection_case: "Richway",
+        confirmed: 119,
+        latitude: 37.48208,
+        longitude: 126.901384,
+        time: "UTF로 해주세요",
+        name: "Jamin"
+      }]
+    })
+      .then((res) => {
+        setUserData(res.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },[]);
+
   return (
     <MapGL
       {...info}
       width="100vw"
       height="100vh"
-      mapStyle="mapbox://styles/holee/ckcmzzc5y24hb1ip8lnkdt8sq"
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_THEME}
-      onViewportChange={info.isMain ? ()=>{""} : (nextViewport) => setInfo({ ...info, ...nextViewport })}
-      // mapStyle="mapbox://styles/mapbox/dark-v9"
+      // mapStyle="mapbox://styles/holee/ckcmzzc5y24hb1ip8lnkdt8sq"
+      // mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_THEME}
+      onViewportChange={
+        info.isMain
+          ? () => {
+              "";
+            }
+          : (nextViewport) => setInfo({ ...info, ...nextViewport })
+      }
       // mapStyle="mapbox://styles/mapbox/streets-v11"
-      // mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      mapStyle="mapbox://styles/mapbox/dark-v9"
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
+      <Marker userData={userData}/>
       <div className="container">
         <div className="item">
           <InputBox
@@ -90,6 +133,14 @@ function Compose() {
             isMain={info.isMain}
           />
         </div>
+        {/* {info.isMain ? (
+          () => {
+            "";
+          }
+        ) : (
+          <Sliderbar />
+        )} */}
+        <Footer />
         {/* <Chart/> */}
       </div>
     </MapGL>
