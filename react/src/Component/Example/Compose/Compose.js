@@ -116,7 +116,9 @@ function Compose() {
     console.log(markerList);
   };
 
-  const func_submit = () => {};
+  const func_submit = () => {
+    console.log(markerList);
+  };
 
   const func_revise = (idx, latitude, longitude) => {
     let revised = markerList.slice();
@@ -173,7 +175,7 @@ function Compose() {
         ) : (
           <Sliderbar />
         )}
-        <SideBar func_create={func_create}/>
+        <SideBar func_create={func_create} func_submit={func_submit}/>
         <Footer />
         <Chart />
       </div>
