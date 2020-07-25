@@ -1,7 +1,18 @@
 .Circle {
-  width: 5px;
-  height: 5px;
+  width: 3px;
+  height: 3px;
   background-color: red;
+  border-radius: 50%;
+  opacity: 1;
+  animation-name: example;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.Circle2 {
+  width: 3px;
+  height: 3px;
+  background-color: lime;
   border-radius: 50%;
   opacity: 1;
   animation-name: example;

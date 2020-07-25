@@ -73,13 +73,12 @@ router.get("/data/covid19", cors(), async function (req, res) {
 router.post("/data/user", cors(), async function (req, res) {
   let userData = [];
   let iterator = req.query.user_data.entries();
-
   const dataBuffer = fs.readFileSync(__dirname + "/data/userData.json", "utf8");
 
-  let count = JSON.parse(dataBuffer.toString())["count"]
+  let count = JSON.parse(dataBuffer.toString())["count"];
 
   for (let v of iterator) {
-    let data = JSON.parse(v[1])
+    let data = JSON.parse(v[1]);
     let result = {
       case_id: count++,
       province: data.province,
@@ -92,7 +91,7 @@ router.post("/data/user", cors(), async function (req, res) {
       time: data.time,
       name: data.name,
     };
-    console.log(JSON.parse(v[1]))
+    console.log(JSON.parse(v[1]));
     userData.push(result);
   }
 
@@ -100,7 +99,7 @@ router.post("/data/user", cors(), async function (req, res) {
     userData.push(v);
   }
 
-  let data = JSON.stringify({count: count, userData: userData });
+  let data = JSON.stringify({ count: count, userData: userData });
   fs.writeFileSync(__dirname + "/data/userData.json", data, "utf8", function (
     error,
     data

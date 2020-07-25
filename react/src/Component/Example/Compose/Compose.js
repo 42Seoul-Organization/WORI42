@@ -60,12 +60,24 @@ function Compose() {
             name: "hochan",
           };
           setConvertedData([...convertedData, result]);
+          shoot();
         })
         .catch((res) => {
           console.log(res);
         })
     );
   };
+
+  const shoot = () =>
+    request("post", `http://localhost:3013/covid19/data/user`, {
+      user_data: convertedData,
+    })
+      .then((res) => {
+        setUserData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
   const go = (infor) => {
     request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
@@ -138,32 +150,7 @@ function Compose() {
   }, [info]);
 
   useEffect(() => {
-    request("post", `http://localhost:3013/covid19/data/user`, {
-      user_data: [
-        {
-          province: "Seoul",
-          city: "Yongsan-gu",
-          group: "TRUE",
-          infection_case: "Itaewon Clubs",
-          confirmed: 139,
-          latitude: 37.538621,
-          longitude: 126.992652,
-          time: "UTF로 해주세요",
-          name: "hochan",
-        },
-        {
-          province: "Seoul",
-          city: "Gwanak-gu",
-          group: "TRUE",
-          infection_case: "Richway",
-          confirmed: 119,
-          latitude: 37.48208,
-          longitude: 126.901384,
-          time: "UTF로 해주세요",
-          name: "Jamin",
-        },
-      ],
-    })
+    request("get", `http://localhost:3013/covid19/data/covid19`)
       .then((res) => {
         setUserData(res.data);
       })
@@ -213,7 +200,7 @@ function Compose() {
       }
       // mapStyle="mapbox://styles/mapbox/streets-v11"
       // mapStyle="mapbox://styles/mapbox/dark-v9"
-      mapStyle="mapbox://styles/holee/ckd0isb0511wr1iqvi1347ng8"
+      mapStyle="mapbox://styles/holee/ckd0isb0511wr1iqvi1347ng8/draft"
       ref={map_ref}
       // mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
