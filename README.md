@@ -1,10 +1,13 @@
 # [빅데이터를 활용한 재난 전파 시각화 예측 시스템] 우리42
-![javascript](https://img.shields.io/badge/Javascript-Language-Yellow?logo=javascript)
+![javascript](https://img.shields.io/badge/Language-Javascript-Yellow?logo=javascript)
+![mapbox](https://img.shields.io/badge/Map-Mapbox-blue?logo=Mapbox)
+![sass](https://img.shields.io/badge/CSS-SCSS-pink?logo=sass)
 
 <br>
 
-https://www.youtube.com/watch?v=YRMAvvRQmpc&feature=youtu.be
+https://www.youtube.com/watch?v=YRMAvvRQmpc&feature=youtu.be  
 
+<img src="./img/WOORI42.png/">
 #### ☕ 제3회 정부혁신제안 끝장개발대회 메이커톤
 ```
 👉 정부가 가진 난제(코로나19 재난상황)를 국민과 함께 공동생산방식으로 문제해결 해커톤
