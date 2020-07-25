@@ -4,7 +4,7 @@ import Form from "./Form";
 import UserInputList from "./UserInputList";
 
 class UserInput extends Component {
-  id = 3;
+  id = 0;
 
   state = {
     input: "",

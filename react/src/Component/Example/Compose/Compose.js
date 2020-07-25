@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import MapGL, { FlyToInterpolator } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -13,6 +13,7 @@ import "./compose.scss";
 
 // import Chart from "../Chart/Chart";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 function Compose() {
@@ -29,16 +30,16 @@ function Compose() {
   });
   const [userData, setUserData] = useState([]);
   const [convertedData, setConvertedData] = useState([]);
+  const [idx, setIdx] = useState(0);
+  const map_ref = useRef();
 
-  const mainSearchInput = useCallback(
-    (vp) => {
-      setInfo({
-        ...info,
-        searchInfo: vp.target.value,
-      });
-    },
-    [info]
-  );
+  const mainSearchInput = useCallback((vp) => {
+    setInfo({
+      ...info,
+      searchInfo: vp.target.value,
+    });
+    console.log("hh");
+  });
 
   const getAddress = (data) => {
     data.map((data) =>
@@ -50,7 +51,7 @@ function Compose() {
           let result = {
             province: res.data.results[0].address_components[1].long_name,
             city: res.data.results[0].address_components[2].long_name,
-            group: "TRUE",
+            group: "NEW",
             infection_case: "User_data",
             confirmed: 1,
             latitude: data[1],
@@ -66,12 +67,47 @@ function Compose() {
     );
   };
 
+  const go = (infor) => {
+    request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
+      address: infor,
+      key: process.env.REACT_APP_Google_Token,
+    })
+      .then((res) => {
+        console.log("search");
+        setInfo({
+          ...info,
+          isMain: false,
+          latitude: res.data.results[0].geometry.location.lat,
+          longitude: res.data.results[0].geometry.location.lng,
+          searchInfo: infor,
+          zoom: 14,
+          transitionInterpolator: new FlyToInterpolator(),
+          transitionDuration: 1000,
+        });
+        if (markerList.length <= 6) {
+          setMarkerList(
+            markerList.concat([
+              [
+                res.data.results[0].geometry.location.lat,
+                res.data.results[0].geometry.location.lng,
+                infor,
+              ],
+            ])
+          ); // 현재 지도에서 보고 있는 좌표의 정 가운데 좌표를 넣어줘야 함
+        }
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  };
+
   const goToViewPort = useCallback(() => {
     request("get", `https://maps.googleapis.com/maps/api/geocode/json`, {
       address: info.searchInfo,
       key: process.env.REACT_APP_Google_Token,
     })
       .then((res) => {
+        console.log("search");
         setInfo({
           ...info,
           isMain: false,
@@ -139,14 +175,16 @@ function Compose() {
   const [markerList, setMarkerList] = useState([]);
 
   const func_create = (name) => {
-    if (markerList.length <= 6) {
-      setMarkerList(markerList.concat([[37.5326, 127.024612, name]])); // 현재 지도에서 보고 있는 좌표의 정 가운데 좌표를 넣어줘야 함
-    }
+    go(name);
+
+    // if (markerList.length <= 6) {
+    //   setMarkerList(markerList.concat([[info.latitude, info.longitude, name]])); // 현재 지도에서 보고 있는 좌표의 정 가운데 좌표를 넣어줘야 함
+    // }
+    setIdx(idx + 1);
     console.log(markerList);
   };
 
   const func_submit = () => {
-    let temp;
     console.log(markerList);
     getAddress(markerList);
     console.log(convertedData);
@@ -176,6 +214,7 @@ function Compose() {
       // mapStyle="mapbox://styles/mapbox/streets-v11"
       // mapStyle="mapbox://styles/mapbox/dark-v9"
       mapStyle="mapbox://styles/holee/ckd0isb0511wr1iqvi1347ng8"
+      ref={map_ref}
       // mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
       <Marker userData={userData} />
@@ -207,7 +246,13 @@ function Compose() {
         ) : (
           <Sliderbar />
         )}
-        <SideBar func_create={func_create} func_submit={func_submit} />
+        {info.isMain ? (
+          () => {
+            "";
+          }
+        ) : (
+          <SideBar func_create={func_create} func_submit={func_submit} />
+        )}
         <Footer />
         {/* <Chart /> */}
       </div>

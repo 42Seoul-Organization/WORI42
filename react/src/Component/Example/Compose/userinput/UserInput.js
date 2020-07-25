@@ -23,7 +23,7 @@ class UserInput extends Component {
     this.props.func_create(input);
     this.setState({
       input: "",
-      todos: todos.concat({
+      todos: todos.length >= 6 ? todos : todos.concat({
         id: this.id++,
         text: input,
         checked: false,
@@ -75,6 +75,7 @@ class UserInput extends Component {
     return (
       <div className="mainForm">
         <h2>정보 보내기</h2>
+        <p>최대 6개까지 가능합니다!</p>
       <UserInputListTemplate
         form={
           <Form
