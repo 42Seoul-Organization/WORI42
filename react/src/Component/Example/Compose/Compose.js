@@ -38,7 +38,6 @@ function Compose() {
       ...info,
       searchInfo: vp.target.value,
     });
-    console.log("hh");
   });
 
   const getAddress = (data) => {
@@ -85,7 +84,6 @@ function Compose() {
       key: process.env.REACT_APP_Google_Token,
     })
       .then((res) => {
-        console.log("search");
         setInfo({
           ...info,
           isMain: false,
@@ -119,7 +117,6 @@ function Compose() {
       key: process.env.REACT_APP_Google_Token,
     })
       .then((res) => {
-        console.log("search");
         setInfo({
           ...info,
           isMain: false,
