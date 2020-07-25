@@ -8,6 +8,8 @@
 https://www.youtube.com/watch?v=YRMAvvRQmpc&feature=youtu.be  
 
 <img src="./img/WOORI42.png/">
+<img src="./img/WOORI42_2.png/">
+
 #### ☕ 제3회 정부혁신제안 끝장개발대회 메이커톤
 ```
 👉 정부가 가진 난제(코로나19 재난상황)를 국민과 함께 공동생산방식으로 문제해결 해커톤
