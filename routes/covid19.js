@@ -65,8 +65,9 @@ router.get("/infomation/service", cors(), async function (req, res) {
 
 /* GET service page. */
 router.get("/data/covid19", cors(), async function (req, res) {
+  const dataBuffer = fs.readFileSync(__dirname + "/data/userData.json", "utf8");
   res.set("Content-Type", "text/json");
-  res.status(200).json(COVID19);
+  res.status(200).json([...COVID19, ...JSON.parse(dataBuffer.toString())["userData"]]);
 });
 
 /* POST service page. */
@@ -74,7 +75,7 @@ router.post("/data/user", cors(), async function (req, res) {
   let userData = [];
   let iterator = req.query.user_data.entries();
   const dataBuffer = fs.readFileSync(__dirname + "/data/userData.json", "utf8");
-
+  
   let count = JSON.parse(dataBuffer.toString())["count"];
 
   for (let v of iterator) {

@@ -54,8 +54,8 @@ function Compose() {
             group: "NEW",
             infection_case: "User_data",
             confirmed: 1,
-            latitude: data[1],
-            longitude: data[0],
+            latitude: data[0],
+            longitude: data[1],
             time: "UTF로 해주세요",
             name: "hochan",
           };
@@ -69,7 +69,7 @@ function Compose() {
   };
 
   const shoot = () =>
-    request("post", `http://localhost:3013/covid19/data/user`, {
+    request("post", `http://localhost:3014/covid19/data/user`, {
       user_data: convertedData,
     })
       .then((res) => {
@@ -150,7 +150,7 @@ function Compose() {
   }, [info]);
 
   useEffect(() => {
-    request("get", `http://localhost:3013/covid19/data/covid19`)
+    request("get", `http://localhost:3014/covid19/data/covid19`)
       .then((res) => {
         setUserData(res.data);
       })
