@@ -69,7 +69,7 @@ function Compose() {
   };
 
   const shoot = () =>
-    request("post", `http://localhost:3014/covid19/data/user`, {
+    request("post", `https://hackertonopendata.herokuapp.com/covid19/data/user`, {
       user_data: convertedData,
     })
       .then((res) => {
@@ -150,7 +150,7 @@ function Compose() {
   }, [info]);
 
   useEffect(() => {
-    request("get", `http://localhost:3014/covid19/data/covid19`)
+    request("get", `https://hackertonopendata.herokuapp.com/covid19/data/covid19`)
       .then((res) => {
         setUserData(res.data);
       })
